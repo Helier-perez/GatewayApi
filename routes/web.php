@@ -2,6 +2,9 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use Ramsey\Uuid\Guid\Guid;
+use Illuminate\Support\Facades\Http;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -14,5 +17,10 @@
 */
 
 $router->get('/', function () use ($router) {
-    return "GatewayApi";
+
+    $books = Http::get('http://lumenbooksapi-web-1');
+    $authors = Http::get('http://lumenauthorsapi-web-1');
+    
+
+    return "GetwayApi(" .$books->body() ."," .$authors->body() .")";
 });
