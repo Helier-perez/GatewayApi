@@ -31,6 +31,7 @@ $app->withEloquent();
  * Registering config files
  */
 $app->configure('services');
+$app->configure('auth');
 
 /*
 |--------------------------------------------------------------------------
@@ -82,7 +83,8 @@ $app->configure('app');
 // ]);
 
 $app->routeMiddleware([
-     'auth' => App\Http\Middleware\Authenticate::class,
+//     'auth' => App\Http\Middleware\Authenticate::class,
+        'client.credentials' => Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
  ]);
 
 /*
@@ -101,6 +103,7 @@ $app->routeMiddleware([
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
+
 
 /*
 |--------------------------------------------------------------------------
