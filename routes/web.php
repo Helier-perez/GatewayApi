@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Http;
 |
 */
 
+$router->post('/convertXmlToJson', 'XmlToJsonController@convert');
+
+
+/**
+* Routes protected by user credentials
+*/
+$router->group(['middleware' => 'auth:api'], function() use ($router){
+    $router->get('/users/me', 'UserController@me');
+});
+
 $router->group(['middleware' => 'client.credentials'], function() use ($router){
     /**
      * Authors routes
@@ -50,9 +60,3 @@ $router->group(['middleware' => 'client.credentials'], function() use ($router){
 
 
 
-/**
-* Routes protected by user credentials
-*/
-$router->group(['middleware' => 'auth:api'], function() use ($router){
-    $router->get('/users/me', 'UserController@me');
-});
